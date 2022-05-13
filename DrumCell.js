@@ -1,16 +1,11 @@
 /**
- * An abstraction of the one-shot sampler
+ * DrumCell 클래스 만들기
  *
- @class DrumCell
  */
 class DrumCell {
-  /**
-   * Creates an instance of DrumCell with two required arguments.
-   *
-   * @param {Audionode} outputNode The outgoing AudioNode
-   * @param {AudioBuffer} audioBuffer An AudioBuffer to be played
-   * @memberof DrumCell
-   */
+ /* *
+   * 변수지정
+   * */
   constructor(outputNode, audioBuffer) {
     this._context = outputNode.context;
     this._buffer = audioBuffer;
@@ -18,9 +13,7 @@ class DrumCell {
   }
 
   /**
-   * Plays the assigned buffer when called.
-   *
-   * @memberof DrumCell
+   * 오디오의 입력
    */
   playSample() {
     const bufferSource =
