@@ -30,6 +30,7 @@ const buildDrumCellMap = async (outputNode, directoryHandle) => {
 
 	  return drumCellMap;
 };
+
 /**
  * qwerasdfzxcv로 추출한 오디오버퍼소스와 1대1매핑
  */
