@@ -1,4 +1,12 @@
-mport DrumCell from './DrumCell.js';
+/**
+ * DrumCell.js 클래스연결
+ */
+import DrumCell from './DrumCell.js';
+
+/**
+ * 파일명 drum이고 확장자mp3인파일을선택
+ * 디코딩을 통한 버퍼출력 
+ */
 
 const getAudioBufferByFileName = async (
 	    audioContext, fileName, directoryHandle) => {
@@ -7,7 +15,9 @@ const getAudioBufferByFileName = async (
 		      const arrayBuffer = await file.arrayBuffer();
 		      return await audioContext.decodeAudioData(arrayBuffer);
 	    };
-
+/**
+ * 웹에 오디오버퍼소스추출  
+ */
 const buildDrumCellMap = async (outputNode, directoryHandle) => {
 	  const drumCellMap = {};
 	  for await (const entry of directoryHandle.values()) {
@@ -20,7 +30,9 @@ const buildDrumCellMap = async (outputNode, directoryHandle) => {
 
 	  return drumCellMap;
 };
-
+/**
+ * qwerasdfzxcv로 추출한 오디오버퍼소스와 1대1매핑
+ */
 const bindKeyToDrumCellMap = (drumCellMap) => {
 	  const keys = 'qwerasdfzxcv'.split('');
 	  const drumCells = Object.values(drumCellMap);
@@ -36,6 +48,10 @@ const bindKeyToDrumCellMap = (drumCellMap) => {
 		    });
 };
 
+/**
+ * 오디오버퍼소스에 잔향효과 추가
+ * 
+ * */
 const buildMainBus = async (audioContext, directoryHandle) => {
 	  const compressor = new DynamicsCompressorNode(audioContext);
 	  const irBuffer = await getAudioBufferByFileName(
@@ -50,6 +66,11 @@ const buildMainBus = async (audioContext, directoryHandle) => {
 	  return compressor;
 };
 
+/**
+ * 위에서 입력한
+ * 오디오버퍼소스추출, 키보드에 1대1매핑, 잔향효과를
+ * 순서대로 실행
+ */
 const initializeDrumMachine = async (audioContext) => {
 	  const directoryHandle = await window.showDirectoryPicker();
 	  const mainBus = await buildMainBus(audioContext, directoryHandle);
@@ -57,6 +78,10 @@ const initializeDrumMachine = async (audioContext) => {
 	  await bindKeyToDrumCellMap(drumCellMap);
 };
 
+/**
+ * 사용자가 오디오버퍼소스를 입력해야만 버튼 활성화
+ * 버튼 클릭시 initializeDrumMachine 함수 출력
+ */
 const audioContext = new AudioContext();
 
 const onLoad = async () => {

@@ -4,7 +4,7 @@
  */
 class DrumCell {
  /* *
-   * 변수지정
+   * 오디오버퍼, 출력노드 변수지정
    * */
   constructor(outputNode, audioBuffer) {
     this._context = outputNode.context;
@@ -13,7 +13,7 @@ class DrumCell {
   }
 
   /**
-   * 오디오의 입력
+   * 소스파일에서 가져온 버퍼입력방식
    */
   playSample() {
     const bufferSource =
